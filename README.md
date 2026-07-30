@@ -6,7 +6,7 @@ This repository contains the machine-learning code used for model comparison, XG
 
 ## Contents
 
-- `benchmarks/`: independent GPR, MLP, random forest, SVR, and XGBoost comparison scripts.
+- `model/`: independent GPR, MLP, random forest, SVR, and XGBoost comparison scripts.
 - `xgboost_prediction.py`: full-data XGBoost training and prediction of four mechanical properties.
 - `shap_analysis.py`: SHAP-based feature influence analysis.
 
