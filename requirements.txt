@@ -1,0 +1,11 @@
+numpy
+pandas
+matplotlib
+openpyxl
+scikit-learn
+xgboost
+bayesian-optimization
+hyperopt
+optuna
+shap
+joblib
