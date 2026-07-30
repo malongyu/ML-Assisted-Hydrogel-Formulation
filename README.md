@@ -16,13 +16,6 @@ This repository contains the machine-learning code used for model comparison, XG
 pip install -r requirements.txt
 ```
 
-## Data
-
-Place the following files in `data/`:
-
-- `experimental_data.xlsx`: experimental dataset; the first seven numeric columns are input features and the last four are mechanical-property outputs.
-- `candidate_formulations.xlsx`: candidate formulation library containing the same seven input features in the same order.
-
 ## Usage
 
 Run all commands from the repository root:
