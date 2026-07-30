@@ -27,7 +27,7 @@ os.makedirs(os.path.dirname(OUT_PNG), exist_ok=True)
 
 def load_and_prepare(path=EXCEL_PATH):
     if not os.path.exists(path):
-        raise FileNotFoundError(f"找不到数据文件：{path}")
+        raise FileNotFoundError(f"Data file not found: {path}")
     df = pd.read_excel(path)
     df_num = df.select_dtypes(include=['number']).copy()
 
@@ -37,7 +37,7 @@ def load_and_prepare(path=EXCEL_PATH):
 
 
     if df_num.shape[1] < 11:
-        raise ValueError(f"数据列数不足！当前有 {df_num.shape[1]} 列，需要至少 11 列（前7列输入，最后4列输出）。")
+        raise ValueError(f"At least 11 numeric columns are required; found {df_num.shape[1]}.")
 
 
     X_raw = df_num.iloc[:, :7].copy()
@@ -54,11 +54,11 @@ def load_and_prepare(path=EXCEL_PATH):
 
 
 def main():
-    print(">>> 正在加载并处理数据 (7 个输入特征, 4 个输出性能)...")
+    print(">>> Loading and preprocessing data (7 input features, 4 output properties)...")
     X, y_data, perf_names = load_and_prepare(EXCEL_PATH)
     
     n_properties = y_data.shape[1]
-    print(f">>> 性能指标名称: {perf_names}")
+    print(f">>> Property names: {perf_names}")
 
 
     X_train, X_test, y_train, y_test = train_test_split(
@@ -67,9 +67,9 @@ def main():
 
     n_train_total = len(X_train)
     if n_train_total < 18:
-        raise ValueError("训练集样本量太少，请确保 Excel 中有足够的数据行数。")
+        raise ValueError("The training set is too small. Ensure that the spreadsheet contains enough data rows.")
 
-    print(f"\n>>> 数据集划分完毕：训练集最大容量 {n_train_total} 个，固定测试集 {len(X_test)} 个")
+    print(f"\n>>> Data split completed: maximum training size = {n_train_total}, fixed test size = {len(X_test)}")
 
 
     space = {
@@ -99,14 +99,14 @@ def main():
         "best_n_estimators": []
     }
 
-    print(f"\n>>> 开始进行 {num_gradients} 个梯度的训练，每个梯度对 {n_properties} 个性能指标分别进行贝叶斯优化...\n")
+    print(f"\n>>> Starting XGBoost training across {num_gradients} sample-size gradients with Bayesian optimization for {n_properties} properties...\n")
 
     for i in range(1, num_gradients + 1):
         current_size = n_train_total if i == num_gradients else i * chunk_size
 
         X_sub = X_train[:current_size]
 
-        print(f"--- 正在处理梯度 {i}/{num_gradients} (样本数: {current_size}) ---")
+        print(f"--- Processing gradient {i}/{num_gradients} (sample size: {current_size}) ---")
 
 
         for prop_idx in range(n_properties):
@@ -114,7 +114,7 @@ def main():
             y_test_single = y_test[:, prop_idx]
             prop_name = perf_names[prop_idx]
 
-            print(f"  > 正在优化性能指标: {prop_name}")
+            print(f"  > Optimizing property: {prop_name}")
 
             def objective(params):
                 params['max_depth'] = int(params['max_depth'])
@@ -161,8 +161,8 @@ def main():
             r2_train = r2_score(y_sub, pred_train)
             r2_test = r2_score(y_test_single, pred_test)
 
-            print(f"    - 最优深度: {best_params_formatted['max_depth']}, 最优树量: {best_params_formatted['n_estimators']}")
-            print(f"    - 训练集 R²: {r2_train:.4f} | 测试集 R²: {r2_test:.4f}")
+            print(f"    - Best depth: {best_params_formatted['max_depth']}, best tree count: {best_params_formatted['n_estimators']}")
+            print(f"    - Training R²: {r2_train:.4f} | Test R²: {r2_test:.4f}")
 
             results["gradient"].append(i)
             results["train_size"].append(current_size)
@@ -177,7 +177,7 @@ def main():
 
     df_results = pd.DataFrame(results)
     df_results.to_csv(OUT_CSV, index=False)
-    print(f">>> 全部跑完！详细结果和参数演变已保存至 {OUT_CSV}")
+    print(f">>> Completed. Detailed XGBoost results and parameter history saved to {OUT_CSV}")
 
 
 
