@@ -1,8 +1,6 @@
 # Machine Learning-Assisted Hydrogel Formulation for Artificial Vascular Grafts
 
-This workflow was developed to support the data-driven formulation of hydrogel-based artificial vascular grafts. It links material composition and processing parameters to key mechanical properties relevant to vascular graft performance.
-
-This repository contains the machine-learning code used for model comparison, XGBoost-based property prediction, and SHAP analysis. The original computational procedures and hyperparameter settings are retained; only comments, file names, and input/output paths have been standardized.
+This workflow was developed to support the data-driven formulation of hydrogel-based artificial vascular grafts. It links material composition and processing parameters to key mechanical properties relevant to vascular graft performance.This repository contains the machine-learning code used for model comparison, XGBoost-based property prediction, and SHAP analysis. 
 
 ## Contents
 
