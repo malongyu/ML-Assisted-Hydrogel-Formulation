@@ -21,11 +21,11 @@ pip install -r requirements.txt
 Run all commands from the repository root:
 
 ```bash
-python benchmarks/gpr.py
-python benchmarks/mlp.py
-python benchmarks/random_forest.py
-python benchmarks/svr.py
-python benchmarks/xgboost.py
+python model/gpr.py
+python model/mlp.py
+python model/random_forest.py
+python model/svr.py
+python model/xgboost.py
 python xgboost_prediction.py
 python shap_analysis.py
 ```
