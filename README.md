@@ -29,5 +29,3 @@ python model/xgboost.py
 python xgboost_prediction.py
 python shap_analysis.py
 ```
-
-Generated models, tables, and figures are saved under `outputs/`. XGBoost prediction uses CUDA by default.
