@@ -1,12 +1,10 @@
 # Machine Learning-Assisted Hydrogel Formulation for Artificial Vascular Grafts
 
-This workflow was developed to support the data-driven formulation of hydrogel-based artificial vascular grafts. It links material composition and processing parameters to key mechanical properties relevant to vascular graft performance.This repository contains the machine-learning code used for model comparison, XGBoost-based property prediction, and SHAP analysis. 
+This workflow was developed to support the data-driven formulation of hydrogel-based artificial vascular grafts. It links material composition and processing parameters to key mechanical properties relevant to vascular graft performance.
 
 ## Contents
 
 - `model/`: independent GPR, MLP, random forest, SVR, and XGBoost comparison scripts.
-- `xgboost_prediction.py`: full-data XGBoost training and prediction of four mechanical properties.
-- `shap_analysis.py`: SHAP-based feature influence analysis.
 
 ## Installation
 
@@ -24,6 +22,4 @@ python model/mlp.py
 python model/random_forest.py
 python model/svr.py
 python model/xgboost.py
-python xgboost_prediction.py
-python shap_analysis.py
 ```
